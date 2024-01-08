@@ -301,6 +301,13 @@ app.put("/dateUpdate/:email", async (req, res) => {
   }
 })
 
+app.get("/getName/:viewMail", (req, res) => {
+  const viewMail = req.params.viewMail;
+  StudentPersonalDetailsModel.findOne({ email: viewMail })
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
 /* ************ VIEW PASS API *********** */
 app.get("/getStatus/:viewMail", (req, res) => {
   const viewMail = req.params.viewMail;

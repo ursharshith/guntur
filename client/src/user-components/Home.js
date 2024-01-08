@@ -218,7 +218,7 @@ export default function Home() {
   };
 
   return (
-    <Box sx={{ display: "flex", backgroundColor: "#F2F2F2" }}>
+    <Box sx={{ display: "flex", backgroundColor: "#fff" }}>
       <CssBaseline />
       <AppBar
         position="fixed"
