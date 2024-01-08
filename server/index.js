@@ -256,6 +256,27 @@ app.put("/statusUpdate/:email", async (req, res) => {
   }
 })
 
+app.put("/qrUrlUpdate/:email", async (req, res) => {
+  try {
+    const { qrUrl } = req.body;
+    const { email } = req.params;
+    const updateDoc = await ApplicationMailsModel.findOneAndUpdate(
+      {email : email},
+      {$set: {imgUrl : qrUrl}},
+      {new : true}
+    );
+
+    if(!updateDoc) {
+      return res.status(404)
+    }
+
+    res.json(updateDoc)
+
+  } catch (err) {
+    res.json(err)
+  }
+})
+
 
 /* ************ VIEW PASS API *********** */
 app.get("/getStatus/:viewMail", (req, res) => {

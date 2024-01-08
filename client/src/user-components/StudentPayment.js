@@ -29,6 +29,7 @@ export default function StudentPayment() {
   const [months, setMonths] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [payButton, setPayButton] = useState(false);
+  const [imgUrl, setImgUrl] = useState(null)
 
   React.useEffect(() => {
     if (passType === "custom") {
@@ -63,13 +64,6 @@ export default function StudentPayment() {
       )
       .catch((err) => console.log(err));
 
-      axios
-      .post("http://localhost:8080/applicaiton_emails", {
-        email, fromplace, toplace, months, status, applicationType,
-      })
-      .then((res) => {})
-      .catch((err) => console.log(err));
-
     if (passType === "year") {
       setMonths(12);
       setTotalAmount(routeAmount * months);
@@ -97,6 +91,12 @@ export default function StudentPayment() {
           setPaymentStatus(true);
           navigate("/student/high-school/payment/status");
         })
+        .catch((err) => console.log(err));
+      axios
+        .post("http://localhost:8080/applicaiton_emails", {
+          email, fromplace, toplace, months, status, applicationType, imgUrl
+        })
+        .then((res) => { })
         .catch((err) => console.log(err));
     } else {
       alert("Enter correct total amount");

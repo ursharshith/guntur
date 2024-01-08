@@ -136,7 +136,8 @@ const AdminHome = () => {
   };
 
   const link = `http://localhost:8080/uploads/${imageUrl}`
-  const [newStatus, setNewStatus] = useState("failed");
+  // const [newStatus, setNewStatus] = useState("failed");
+  // const [hello, setHello] = useState(true)
 
   // console.log(imageUrl)
   // console.log(link)
@@ -147,26 +148,39 @@ const AdminHome = () => {
   // console.log(studentInstitutionDetails)
   // console.log(studentStudyDetails.data.sscBoard)
 
+  const hello = (stat) => {
+    if(stat === "failed" || stat === "success") {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   const handleFail = () => {
     setShowDetails(false)
     // axios.delete(`http://localhost:8080/deleteApplication/${email}`)
     // .then((res) => console.log(res.data))
     // .catch((err) => console.log(err))
 
+    let newStatus = "failed";
+
     axios.put(`http://localhost:8080/statusUpdate/${email}`, {newStatus})
     .then((res) => {})
     .catch((err) => console.log(err))
 
-    axios.put(`http://localhost:8080/resendApplicationMoney/${email}`)
-    .then((res) => {})
-    .catch((err) => console.log(err))
+    // axios.put(`http://localhost:8080/resendApplicationMoney/${email}`)
+    // .then((res) => {})
+    // .catch((err) => console.log(err))
   }
 
   const navigate = useNavigate();
 
   const handleSuccess = () => {
-    
     navigate("/qrgeneration")
+    let newStatus = "success";
+    axios.put(`http://localhost:8080/statusUpdate/${email}`, {newStatus})
+    .then((res) => {})
+    .catch((err) => console.log(err))
   }
 
 
@@ -180,9 +194,9 @@ const AdminHome = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>
+                  {/* <TableCell>
                     <strong>Sino</strong>
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell style={{ textAlign: "center" }}>
                     <strong>Application email</strong>
                   </TableCell>
@@ -195,11 +209,11 @@ const AdminHome = () => {
                 {mailsData && mailsData.length > 0 ? (
                   mailsData.map((data, index) => (
                     <TableRow key={index}>
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell style={{ cursor: "pointer", textAlign: "center" }}>
+                      {/* {hello(data.status) && (<TableCell>{index + 1}</TableCell>)} */}
+                      {hello(data.status) && (<TableCell style={{ cursor: "pointer", textAlign: "center" }}>
                         {data.email}
-                      </TableCell>
-                      <TableCell
+                      </TableCell>)}
+                      {hello(data.status) && (<TableCell
                         style={{
                           cursor: "pointer",
                           justifyContent: "center",
@@ -214,7 +228,7 @@ const AdminHome = () => {
                         >
                           View
                         </Button>
-                      </TableCell>
+                      </TableCell>)}
                     </TableRow>
                   ))
                 ) : (
@@ -410,7 +424,7 @@ const AdminHome = () => {
           </TableContainer>
         </div>
         <div style={{ flex: 1, margin: "20px" }}>
-          <TableContainer component={Paper}>
+          {/* <TableContainer component={Paper}>
             <Typography
               variant="h5"
               gutterBottom
@@ -419,7 +433,7 @@ const AdminHome = () => {
                 fontSize: "20px",
               }}
             >
-              Institution Details
+              Profile Photo
             </Typography>
             <Table>
               <TableHead style={{ backgroundColor: "#f2f2f2" }}>
@@ -459,11 +473,22 @@ const AdminHome = () => {
                 </TableRow>
               </TableBody>
             </Table>
-          </TableContainer>
+          </TableContainer> */}
+          <Typography
+              variant="h5"
+              gutterBottom
+              style={{
+                // marginLeft: "25%",
+                fontSize: "20px",
+              }}
+            >
+              Profile Photo
+            </Typography>
+            <img src={link} style={{height:"150px", width:"150px", textAlign:"center"}} alt="images"/>
         </div>
       </div>
       <div style={{ margin: "auto" }}>
-      <img src={link} alt="images"/>
+      
         <Button
           type="text"
           variant="contained"

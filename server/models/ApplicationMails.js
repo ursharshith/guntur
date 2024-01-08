@@ -7,6 +7,7 @@ const ApplicationMails = mongoose.Schema({
     months: String,
     status: String,
     applicationType: String,
+    imgUrl:String,
 })
 
 const ApplicationMailsModel = mongoose.model('application-mails', ApplicationMails)

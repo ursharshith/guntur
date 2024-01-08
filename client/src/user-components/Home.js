@@ -141,10 +141,11 @@ export default function Home() {
 
   const isUserLoggedin = localStorage.getItem("userSignIn");
   const isAdminLoggedin = localStorage.getItem("admin");
-  console.log(isUserLoggedin);
+  // console.log(isUserLoggedin);
   const firstname = localStorage.getItem("firstname");
   const lastname = localStorage.getItem("lastname");
   const wallet = localStorage.getItem("wallet");
+  const passRoute = `pass${wallet}`
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -438,6 +439,7 @@ export default function Home() {
           admin-portal
           <Route path="/admin-portal" element={<AdminHome />}></Route>
           <Route path="/qrgeneration" element={<QrGenerationPage />}></Route>
+          <Route path={passRoute} element={<QrGenerationPage />}></Route>
         </Routes>
       </Box>
     </Box>
