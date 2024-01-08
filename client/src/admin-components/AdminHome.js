@@ -79,7 +79,7 @@ const AdminHome = () => {
 
     if (user.applicationType === "student") {
       axios.get(`http://localhost:8080/student-apply-personal-details/${user.email}`)
-      // setStudentDetails(res.data)
+        // setStudentDetails(res.data)
         .then((res) => {
           setName(res.data.name)
           setFatherName(res.data.fatherName)
@@ -89,11 +89,11 @@ const AdminHome = () => {
           setEmail(res.data.email)
           setAadhar(res.data.aadhar)
         })
-        
+
         .catch((err) => console.log(err))
 
       axios.get(`http://localhost:8080/student-apply-study-details/${user.email}`)
-      // setStudentStudyDetails(res.data)
+        // setStudentStudyDetails(res.data)
         .then((res) => {
           setSSCType(res.data.sscType)
           setSSCBoard(res.data.sscBoard)
@@ -104,7 +104,7 @@ const AdminHome = () => {
         .catch((err) => console.log(err))
 
       axios.get(`http://localhost:8080/student-apply-insitution-details/${user.email}`)
-      // setStudentInstituionDetails(res.data)
+        // setStudentInstituionDetails(res.data)
         .then((res) => {
           // setDistrictInstitution(res.data.)
           // setMandalInstitution(res.data.)
@@ -116,7 +116,7 @@ const AdminHome = () => {
         .catch((err) => console.log(err))
 
       axios.get(`http://localhost:8080/student-apply-residential-details/${user.email}`)
-      // setStudentResidentialDetails(res.data)
+        // setStudentResidentialDetails(res.data)
         .then((res) => {
           setDistrict(res.data.district)
           setMandal(res.data.mandal)
@@ -126,13 +126,13 @@ const AdminHome = () => {
         })
         .catch((err) => console.log(err))
 
-        axios.get(`http://localhost:8080/getImage/${user.email}`)
-    .then((res) => setImageUrl(res.data.imageurl))
-    .catch((err) => console.log(err));
+      axios.get(`http://localhost:8080/getImage/${user.email}`)
+        .then((res) => setImageUrl(res.data.imageurl))
+        .catch((err) => console.log(err));
 
-    }  if (user.applicationType === "other") {
+    } if (user.applicationType === "other") {
 
-    }  
+    }
   };
 
   const link = `http://localhost:8080/uploads/${imageUrl}`
@@ -149,7 +149,7 @@ const AdminHome = () => {
   // console.log(studentStudyDetails.data.sscBoard)
 
   const hello = (stat) => {
-    if(stat === "failed" || stat === "success") {
+    if (stat === "failed" || stat === "success") {
       return false;
     } else {
       return true;
@@ -164,9 +164,9 @@ const AdminHome = () => {
 
     let newStatus = "failed";
 
-    axios.put(`http://localhost:8080/statusUpdate/${email}`, {newStatus})
-    .then((res) => {})
-    .catch((err) => console.log(err))
+    axios.put(`http://localhost:8080/statusUpdate/${email}`, { newStatus })
+      .then((res) => { })
+      .catch((err) => console.log(err))
 
     // axios.put(`http://localhost:8080/resendApplicationMoney/${email}`)
     // .then((res) => {})
@@ -178,9 +178,9 @@ const AdminHome = () => {
   const handleSuccess = () => {
     navigate("/qrgeneration")
     let newStatus = "success";
-    axios.put(`http://localhost:8080/statusUpdate/${email}`, {newStatus})
-    .then((res) => {})
-    .catch((err) => console.log(err))
+    axios.put(`http://localhost:8080/statusUpdate/${email}`, { newStatus })
+      .then((res) => { })
+      .catch((err) => console.log(err))
   }
 
 
@@ -240,191 +240,191 @@ const AdminHome = () => {
             </Table>
           </TableContainer>
         </div>
-      ) : ( <div
-      style={{
-        textAlign: "left",
-        display: "flex",
-        flexDirection: "column",
-        borderRadius: "10px",
-        backgroundColor: "white",
-        padding: "25px",
-        margin: "20px",
-      }}
-    >
-      <Typography
-        variant="h5"
-        gutterBottom
+      ) : (<div
         style={{
-          marginTop: "10px",
-          marginBottom: "40px",
-          textAlign: "center",
-          fontSize: "2rem",
+          textAlign: "left",
+          display: "flex",
+          flexDirection: "column",
+          borderRadius: "10px",
+          backgroundColor: "white",
+          padding: "25px",
+          margin: "20px",
         }}
       >
-        <spam>APPLICATION</spam>
-      </Typography>
-      <img src={file}></img>
-      <div style={{ display: "flex", flex: 1 }}>
-        <div style={{ flex: 1, margin: "20px" }}>
-          <TableContainer component={Paper}>
-            <Typography
-              variant="h5"
-              gutterBottom
-              style={{
-                marginLeft: "25%",
-                fontSize: "20px",
-              }}
-            >
-              Student Education Details
-            </Typography>
-            <Table>
-              <TableHead style={{ backgroundColor: "#f2f2f2" }}>
-                <TableRow>
-                  <TableCell>
-                    <strong>Name</strong>
-                  </TableCell>
-                  <TableCell>
-                    <strong>Value</strong>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>SSC Board</TableCell>
-                  <TableCell>{sscBoard}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>SSC(Regular/ Supplimentary)</TableCell>
-                  <TableCell>{sscType}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>SSC Pass Year</TableCell>
-                  <TableCell>{sscPassYear}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>SSC Hall Ticket</TableCell>
-                  <TableCell>{sscHallTicket}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Date of Birth</TableCell>
-                  <TableCell>{dob}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
+        <Typography
+          variant="h5"
+          gutterBottom
+          style={{
+            marginTop: "10px",
+            marginBottom: "40px",
+            textAlign: "center",
+            fontSize: "2rem",
+          }}
+        >
+          <spam>APPLICATION</spam>
+        </Typography>
+        <img src={file}></img>
+        <div style={{ display: "flex", flex: 1 }}>
+          <div style={{ flex: 1, margin: "20px" }}>
+            <TableContainer component={Paper}>
+              <Typography
+                variant="h5"
+                gutterBottom
+                style={{
+                  marginLeft: "25%",
+                  fontSize: "20px",
+                }}
+              >
+                Student Education Details
+              </Typography>
+              <Table>
+                <TableHead style={{ backgroundColor: "#f2f2f2" }}>
+                  <TableRow>
+                    <TableCell>
+                      <strong>Name</strong>
+                    </TableCell>
+                    <TableCell>
+                      <strong>Value</strong>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>SSC Board</TableCell>
+                    <TableCell>{sscBoard}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>SSC(Regular/ Supplimentary)</TableCell>
+                    <TableCell>{sscType}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>SSC Pass Year</TableCell>
+                    <TableCell>{sscPassYear}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>SSC Hall Ticket</TableCell>
+                    <TableCell>{sscHallTicket}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Date of Birth</TableCell>
+                    <TableCell>{dob}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+          <div style={{ flex: 1, margin: "20px" }}>
+            <TableContainer component={Paper}>
+              <Typography
+                variant="h5"
+                gutterBottom
+                style={{
+                  marginLeft: "25%",
+                  fontSize: "20px",
+                }}
+              >
+                Residential Address Details
+              </Typography>
+              <Table>
+                <TableHead style={{ backgroundColor: "#f2f2f2" }}>
+                  <TableRow>
+                    <TableCell>
+                      <strong>Name</strong>
+                    </TableCell>
+                    <TableCell>
+                      <strong>Value</strong>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>District</TableCell>
+                    <TableCell>{district}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Mandal</TableCell>
+                    <TableCell>{mandal}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Village</TableCell>
+                    <TableCell>{village}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Address</TableCell>
+                    <TableCell>{address}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Postal Code</TableCell>
+                    <TableCell>{postalCode}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
         </div>
-        <div style={{ flex: 1, margin: "20px" }}>
-          <TableContainer component={Paper}>
-            <Typography
-              variant="h5"
-              gutterBottom
-              style={{
-                marginLeft: "25%",
-                fontSize: "20px",
-              }}
-            >
-              Residential Address Details
-            </Typography>
-            <Table>
-              <TableHead style={{ backgroundColor: "#f2f2f2" }}>
-                <TableRow>
-                  <TableCell>
-                    <strong>Name</strong>
-                  </TableCell>
-                  <TableCell>
-                    <strong>Value</strong>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>District</TableCell>
-                  <TableCell>{district}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Mandal</TableCell>
-                  <TableCell>{mandal}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Village</TableCell>
-                  <TableCell>{village}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Address</TableCell>
-                  <TableCell>{address}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Postal Code</TableCell>
-                  <TableCell>{postalCode}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
-      </div>
-      <div style={{ display: "flex", flex: 1 }}>
-        <div style={{ flex: 1, margin: "20px" }}>
-          <TableContainer component={Paper}>
-            <Typography
-              variant="h5"
-              gutterBottom
-              style={{
-                marginLeft: "25%",
-                fontSize: "20px",
-              }}
-            >
-              Student Details
-            </Typography>
-            <Table>
-              <TableHead style={{ backgroundColor: "#f2f2f2" }}>
-                <TableRow>
-                  <TableCell>
-                    <strong>Name</strong>
-                  </TableCell>
-                  <TableCell>
-                    <strong>Value</strong>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>{name}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Father/ Guardian Name</TableCell>
-                  <TableCell>{fatherName}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Date of Birth</TableCell>
-                  <TableCell>{dob}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Gender</TableCell>
-                  <TableCell>{gender}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Age</TableCell>
-                  <TableCell>{age}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Aadhar</TableCell>
-                  <TableCell>{aadhar}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Mobile No</TableCell>
-                  <TableCell>{mobileNo}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Email</TableCell>
-                  <TableCell>{email}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
-        <div style={{ flex: 1, margin: "20px" }}>
-          {/* <TableContainer component={Paper}>
+        <div style={{ display: "flex", flex: 1 }}>
+          <div style={{ flex: 1, margin: "20px" }}>
+            <TableContainer component={Paper}>
+              <Typography
+                variant="h5"
+                gutterBottom
+                style={{
+                  marginLeft: "25%",
+                  fontSize: "20px",
+                }}
+              >
+                Student Details
+              </Typography>
+              <Table>
+                <TableHead style={{ backgroundColor: "#f2f2f2" }}>
+                  <TableRow>
+                    <TableCell>
+                      <strong>Name</strong>
+                    </TableCell>
+                    <TableCell>
+                      <strong>Value</strong>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>{name}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Father/ Guardian Name</TableCell>
+                    <TableCell>{fatherName}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Date of Birth</TableCell>
+                    <TableCell>{dob}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Gender</TableCell>
+                    <TableCell>{gender}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Age</TableCell>
+                    <TableCell>{age}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Aadhar</TableCell>
+                    <TableCell>{aadhar}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Mobile No</TableCell>
+                    <TableCell>{mobileNo}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Email</TableCell>
+                    <TableCell>{email}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+          <div style={{ flex: 1, margin: "20px" }}>
+            {/* <TableContainer component={Paper}>
             <Typography
               variant="h5"
               gutterBottom
@@ -474,7 +474,7 @@ const AdminHome = () => {
               </TableBody>
             </Table>
           </TableContainer> */}
-          <Typography
+            <Typography
               variant="h5"
               gutterBottom
               style={{
@@ -484,31 +484,31 @@ const AdminHome = () => {
             >
               Profile Photo
             </Typography>
-            <img src={link} style={{height:"150px", width:"150px", textAlign:"center"}} alt="images"/>
+            <img src={link} style={{ height: "150px", width: "150px", textAlign: "center" }} alt="images" />
+          </div>
+        </div>
+        <div style={{ margin: "auto" }}>
+
+          <Button
+            type="text"
+            variant="contained"
+            style={{ marginRight: "8px" }}
+            color="success"
+            onClick={handleSuccess}
+          >
+            Success
+          </Button>
+          <Button
+            type="text"
+            variant="contained"
+            color="info"
+            onClick={handleFail}
+          >
+            failed
+          </Button>
         </div>
       </div>
-      <div style={{ margin: "auto" }}>
-      
-        <Button
-          type="text"
-          variant="contained"
-          style={{ marginRight: "8px" }}
-          color="success"
-          onClick={handleSuccess}
-        >
-          Success
-        </Button>
-        <Button
-          type="text"
-          variant="contained"
-          color="info"
-          onClick={handleFail}
-        >
-          failed
-        </Button>
-      </div>
-    </div>
-  )}
+      )}
     </div>
   );
 };

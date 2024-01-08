@@ -54,7 +54,7 @@
 
 
 
-    
+
 
 //     console.log("current:", formatDate(currentDate))
 //     console.log("future:", formatDate(futureDate))
@@ -87,7 +87,7 @@
 
 // export default QrGenerationPage;
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, TextField, Typography } from "@mui/material";
 import QRcode from "qrcode"
 import { useNavigate } from "react-router-dom";
@@ -104,7 +104,7 @@ const QrGenerationPage = () => {
     const [futureDate, setFutureDate] = useState(null);
 
     const formatDate = (date) => {
-        if (!date) return ''; 
+        if (!date) return '';
         const options = { month: 'long', day: 'numeric', year: 'numeric' };
         return date.toLocaleDateString(undefined, options);
     };
@@ -116,27 +116,50 @@ const QrGenerationPage = () => {
             const newDate = new Date(currentDate);
             newDate.setMonth(newDate.getMonth() + 6);
             setFutureDate(newDate);
+            setStartDate(formatDate(currentDate))
+            setEndDate(formatDate(futureDate))
         } catch (err) {
             console.log(err)
         }
     }
 
-    const email = localStorage.getItem("applicationMail");
+    useEffect(() => {
+        setStartDate(formatDate(currentDate))
+    }, [currentDate])
+
+    useEffect(() => {
+        setEndDate(formatDate(futureDate))
+    }, [futureDate])
+
+    const email = localStorage.getItem("applcationMail");
     const passUrl = `https://passverifier.netlify.app/login`;
+    console.log(email)
     console.log(passUrl)
     console.log(qrUrl)
 
+    console.log("current:", formatDate(currentDate))
+    console.log("future:", formatDate(futureDate))
+    console.log("Start date:", startDate)
+    console.log("End date:", endDate)
+
     const handleDone = () => {
-        navigate("/admin-portal")
+        
         axios.put(`http://localhost:8080/qrUrlUpdate/${email}`, { qrUrl })
             .then((res) => { })
             .catch((err) => console.log(err))
+
+        axios.put(`http://localhost:8080/dateUpdate/${email}`, { startDate, endDate })
+            .then((res) => { })
+            .catch((err) => console.log(err))
+        navigate("/admin-portal")
     }
 
-    console.log(localStorage.getItem("applicationMail"))
+    console.log(localStorage.getItem("applcationMail"))
 
     console.log("current:", formatDate(currentDate))
     console.log("future:", formatDate(futureDate))
+    console.log("Start date:", startDate)
+    console.log("End date:", endDate)
 
     return (
         <div style={{ backgroundColor: "#fff", margin: "20px 200px" }}>

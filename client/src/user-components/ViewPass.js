@@ -112,7 +112,7 @@ function ViewPass() {
 
       {
         success && (
-          <div style={{ color: "green" }}>
+          <div style={{ color: "green", backgroundColor:"#fff" }}>
             <h4>YOUR APPLICATION SUCCESS</h4>
             <br /><br />
             <div>

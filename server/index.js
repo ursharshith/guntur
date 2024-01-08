@@ -278,6 +278,29 @@ app.put("/qrUrlUpdate/:email", async (req, res) => {
 })
 
 
+app.put("/dateUpdate/:email", async (req, res) => {
+  try {
+    const { startDate, endDate } = req.body;
+    const { email } = req.params;
+    const updateDoc = await ApplicationMailsModel.findOneAndUpdate(
+      {email : email},
+      {$set: {startDate : startDate, endDate : endDate}},
+      // {$set: {endDate : endDate}},
+      {new : true}
+      
+    );
+
+    if(!updateDoc) {
+      return res.status(404)
+    }
+
+    res.json(updateDoc)
+
+  } catch (err) {
+    res.json(err)
+  }
+})
+
 /* ************ VIEW PASS API *********** */
 app.get("/getStatus/:viewMail", (req, res) => {
   const viewMail = req.params.viewMail;
