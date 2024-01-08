@@ -30,6 +30,9 @@ export default function StudentPayment() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [payButton, setPayButton] = useState(false);
   const [imgUrl, setImgUrl] = useState(null)
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
+
 
   React.useEffect(() => {
     if (passType === "custom") {
@@ -94,7 +97,7 @@ export default function StudentPayment() {
         .catch((err) => console.log(err));
       axios
         .post("http://localhost:8080/applicaiton_emails", {
-          email, fromplace, toplace, months, status, applicationType, imgUrl
+          email, fromplace, toplace, months, status, applicationType, imgUrl, startDate, endDate
         })
         .then((res) => { })
         .catch((err) => console.log(err));

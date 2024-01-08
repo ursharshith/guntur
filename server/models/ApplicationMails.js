@@ -8,6 +8,8 @@ const ApplicationMails = mongoose.Schema({
     status: String,
     applicationType: String,
     imgUrl:String,
+    startDate:String,
+    endDate:String,
 })
 
 const ApplicationMailsModel = mongoose.model('application-mails', ApplicationMails)
