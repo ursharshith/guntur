@@ -20,7 +20,7 @@ app.use(express.json());
 const staticPath = path.join(__dirname, "./public/");
 app.use(express.static(staticPath));
 app.use(cors());
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const DB = "mongodb+srv://mahipalkeluth143:uK0niUwwZG9FOCHp@majordb.cb49png.mongodb.net/major_project_db?retryWrites=true&w=majority";
 

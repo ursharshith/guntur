@@ -40,7 +40,7 @@
 
 //     const handleDone = () => {
 //         navigate("/admin-portal")
-//         axios.put(`http://localhost:8080/qrUrlUpdate/${email}`, { qrUrl })
+//         axios.put(`https://project-wmxw.onrender.com/qrUrlUpdate/${email}`, { qrUrl })
 //             .then((res) => { })
 //             .catch((err) => console.log(err))
 
@@ -144,11 +144,11 @@ const QrGenerationPage = () => {
 
     const handleDone = () => {
         
-        axios.put(`http://localhost:8080/qrUrlUpdate/${email}`, { qrUrl })
+        axios.put(`https://project-wmxw.onrender.com/qrUrlUpdate/${email}`, { qrUrl })
             .then((res) => { })
             .catch((err) => console.log(err))
 
-        axios.put(`http://localhost:8080/dateUpdate/${email}`, { startDate, endDate })
+        axios.put(`https://project-wmxw.onrender.com/dateUpdate/${email}`, { startDate, endDate })
             .then((res) => { })
             .catch((err) => console.log(err))
         navigate("/admin-portal")

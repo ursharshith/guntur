@@ -11,7 +11,7 @@ function ModificationPage() {
     const navigate = useNavigate();
     const email = localStorage.getItem("userEmail");
     const handleNewWallet = () => {
-        axios.put(`http://localhost:8080/wallet/${email}`, {newWallet})
+        axios.put(`https://project-wmxw.onrender.com/wallet/${email}`, {newWallet})
         .then((result) => {
           navigate("/home");
         })

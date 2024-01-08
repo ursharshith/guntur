@@ -14,12 +14,12 @@ const SeparateDetails = () => {
     const email = "mahipalkeluth143@gmail.com"
 
     useEffect(() => {
-      axios.get(`http://localhost:8080/getImage/${email}`)
+      axios.get(`https://project-wmxw.onrender.com/getImage/${email}`)
       .then((res) => setImageUrl(res.data.imageurl))
       .catch((err) => console.log(err));
     }, [])
 
-    const link = `http://localhost:8080/uploads/${imageUrl}`
+    const link = `https://project-wmxw.onrender.com/uploads/${imageUrl}`
 
   return (
     <div>

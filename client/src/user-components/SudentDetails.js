@@ -87,7 +87,7 @@ export default function StudentDetails({ filename }) {
     formData.append("iam", name);
 
     axios
-      .post("http://localhost:8080/uploadPhoto", formData, {
+      .post("https://project-wmxw.onrender.com/uploadPhoto", formData, {
         body: {
           email:email,
         }
@@ -96,7 +96,7 @@ export default function StudentDetails({ filename }) {
       .catch((err) => console.log(err));
 
     axios
-      .post("http://localhost:8080/student_personal_details", {
+      .post("https://project-wmxw.onrender.com/student_personal_details", {
         name,
         dob,
         gender,
@@ -110,7 +110,7 @@ export default function StudentDetails({ filename }) {
       .catch((err) => console.log(err));
 
     axios
-      .post("http://localhost:8080/student_study_details", {
+      .post("https://project-wmxw.onrender.com/student_study_details", {
         email,
         sscBoard,
         sscType,
@@ -122,7 +122,7 @@ export default function StudentDetails({ filename }) {
       .catch((err) => console.log(err));
 
     axios
-      .post("http://localhost:8080/residential_address_details", {
+      .post("https://project-wmxw.onrender.com/residential_address_details", {
         email,
         district,
         mandal,
@@ -134,7 +134,7 @@ export default function StudentDetails({ filename }) {
       .catch((err) => console.log(err));
 
     axios
-      .post("http://localhost:8080/institution_detail", {
+      .post("https://project-wmxw.onrender.com/institution_detail", {
         email,
         districtInstitution,
         mandalInstitution,
@@ -295,7 +295,7 @@ export default function StudentDetails({ filename }) {
             <spam>Student Details</spam>
           </Typography>
           <div className="sub-divs">
-            {/* <img src="http://localhost:8080/uploads/file_1704565936291.jpg" alt="images"/> */}
+            {/* <img src="https://project-wmxw.onrender.com/uploads/file_1704565936291.jpg" alt="images"/> */}
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -937,7 +937,7 @@ export default function StudentDetails({ filename }) {
             </div>
           </div>
           <div style={{ margin: "auto" }}>
-            <img src={`http://localhost:8080/${imageUrl}`} alt="" />
+            <img src={`https://project-wmxw.onrender.com/${imageUrl}`} alt="" />
             <Button
               type="text"
               onClick={handleEdit}

@@ -51,12 +51,12 @@ export default function OtherUserDetails({ filename }) {
     formData.append("file", file);
 
     axios
-      .post("http://localhost:8080/uploadPhoto", formData, { email })
+      .post("https://project-wmxw.onrender.com/uploadPhoto", formData, { email })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 
     axios
-      .post("http://localhost:8080/user_apply_personal_details", {
+      .post("https://project-wmxw.onrender.com/user_apply_personal_details", {
         name,
         dob,
         gender,
@@ -70,7 +70,7 @@ export default function OtherUserDetails({ filename }) {
       .catch((err) => console.log(err));
 
     axios
-      .post("http://localhost:8080/user_apply_residential_details", {
+      .post("https://project-wmxw.onrender.com/user_apply_residential_details", {
         email,
         district,
         mandal,
@@ -82,7 +82,7 @@ export default function OtherUserDetails({ filename }) {
       .catch((err) => console.log(err));
 
     axios
-      .post("http://localhost:8080/applicaiton_emails", {
+      .post("https://project-wmxw.onrender.com/applicaiton_emails", {
         email,
       })
       .then((res) => {})

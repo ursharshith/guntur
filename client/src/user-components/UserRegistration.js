@@ -24,7 +24,7 @@ function UserRegistration() {
 
   const handleRegistration = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:8080/user-signin", { email })
+    axios.post("https://project-wmxw.onrender.com/user-signin", { email })
     .then((res) => {
       if(res.data.status === "Success") {
         alert("no");
@@ -32,7 +32,7 @@ function UserRegistration() {
     })
     .then(() => {
       axios
-          .post("http://localhost:8080/register", {
+          .post("https://project-wmxw.onrender.com/register", {
             firstname,
             lastname,
             phone,

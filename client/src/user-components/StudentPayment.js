@@ -56,7 +56,7 @@ export default function StudentPayment() {
     setShowAmount(true);
 
     axios
-      .get("http://localhost:8080/routeCost")
+      .get("https://project-wmxw.onrender.com/routeCost")
       .then((result) => setRouteDetails(result.data))
       .then(
         routeDetails.map((route) => {
@@ -89,14 +89,14 @@ export default function StudentPayment() {
   const handlePay = () => {
     if (`${totalAmount}` === `${cost}`) {
       axios
-        .put(`http://localhost:8080/payment/${email}`, { cost })
+        .put(`https://project-wmxw.onrender.com/payment/${email}`, { cost })
         .then((result) => {
           setPaymentStatus(true);
           navigate("/student/high-school/payment/status");
         })
         .catch((err) => console.log(err));
       axios
-        .post("http://localhost:8080/applicaiton_emails", {
+        .post("https://project-wmxw.onrender.com/applicaiton_emails", {
           email, fromplace, toplace, months, status, applicationType, imgUrl, startDate, endDate
         })
         .then((res) => { })
