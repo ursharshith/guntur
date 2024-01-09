@@ -64,7 +64,7 @@ function ViewPass() {
       .catch((err) => console.log(err));
 
     axios
-      .get(`http://localhost:8080/getName/${viewMail}`)
+      .get(`https://project-wmxw.onrender.com/getName/${viewMail}`)
       .then((res) => {
         setNameDetails(res.data);
         // setStatus(res.data.status);
