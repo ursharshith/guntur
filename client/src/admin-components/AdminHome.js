@@ -18,7 +18,7 @@ const AdminHome = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [imageUrl, setImageUrl] = useState();
 
-  //Student 10th details
+  //Student Education details
   const [sscBoard, setSSCBoard] = useState("");
   const [sscType, setSSCType] = useState("");
   const [sscPassYear, setSSCPassYear] = useState("");
