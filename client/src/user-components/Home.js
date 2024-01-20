@@ -16,18 +16,17 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import AutorenewIcon from "@mui/icons-material/Autorenew";
 import WalletIcon from "@mui/icons-material/Wallet";
 import ApprovalIcon from "@mui/icons-material/Approval";
 import { Avatar, Button } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
 import AddIcon from "@mui/icons-material/Add";
 import HomeIcon from "@mui/icons-material/Home";
 import PageviewIcon from "@mui/icons-material/Pageview";
-import { Route, Router, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import SignInPage from "./SignInPage";
 import UserSignIn from "./UserSignIn";
 import AdminSignIn from "./AdminSignIn";
@@ -72,7 +71,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -121,10 +119,9 @@ function stringAvatar(name) {
 }
 
 export default function Home() {
-  const childRef = useRef(null); // Create a ref for the child component
+  const childRef = useRef(null);
 
   const callChildFunction = () => {
-    // Call the childFunction of the ChildComponent using the ref
     if (childRef.current) {
       childRef.current.guideFunction();
     }
@@ -141,11 +138,10 @@ export default function Home() {
 
   const isUserLoggedin = localStorage.getItem("userSignIn");
   const isAdminLoggedin = localStorage.getItem("admin");
-  // console.log(isUserLoggedin);
   const firstname = localStorage.getItem("firstname");
   const lastname = localStorage.getItem("lastname");
   const wallet = localStorage.getItem("wallet");
-  const passRoute = `pass${wallet}`
+  const passRoute = `pass${wallet}`;
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -271,17 +267,7 @@ export default function Home() {
             <div style={divStyleAdminAvatar}>
               <Avatar src="/broken-image.jpg" />
             </div>
-            // <Avatar src="/broken-image.jpg" />
           )}
-          {/* <div style={divStyleLogin}>
-            <Button
-              variant="text"
-              style={{ color: "white" }}
-              onClick={callChildFunction}
-            >
-              Guide
-            </Button>
-          </div> */}
           {isUserLoggedin && !isAdminLoggedin && (
             <div style={divStyleAvatar}>
               <Avatar
@@ -365,23 +351,14 @@ export default function Home() {
                 <ListItemText onClick={handleViewPass}>View Pass</ListItemText>
               </ListItemButton>
             </ListItem>
-
-            {/* <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <AutorenewIcon />
-                </ListItemIcon>
-                <ListItemText onClick={handleRenewalPass}>
-                  Renewal Pass
-                </ListItemText>
-              </ListItemButton>
-            </ListItem> */}
             <ListItem disablePadding onMouseEnter={handleListItemMouseEnter}>
               <ListItemButton onClick={handleListItemClick2}>
                 <ListItemIcon>
                   <WalletIcon />
                 </ListItemIcon>
-                <ListItemText>Wallet: <strong>{wallet}</strong></ListItemText>
+                <ListItemText>
+                  Wallet: <strong>{wallet}</strong>
+                </ListItemText>
                 {openSubsection2 ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </ListItemButton>
             </ListItem>
@@ -402,7 +379,9 @@ export default function Home() {
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>
-                <ListItemText style={{color:"red"}} onClick={handleLogout}>logout</ListItemText>
+                <ListItemText style={{ color: "red" }} onClick={handleLogout}>
+                  logout
+                </ListItemText>
               </ListItemButton>
             </ListItem>
           </List>

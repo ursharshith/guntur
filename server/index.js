@@ -12,7 +12,7 @@ const ResidentialAddressDetailsModel = require("./models/ResidentialAddressDetai
 const UserPersonalDetailsModel = require("./models/UserPersonalDetails");
 const UserResidentialDetailsModel = require("./models/UserResidentialDetails");
 const ApplicationMailsModel = require("./models/ApplicationMails");
-const path = require('path');
+const path = require("path");
 const { error } = require("console");
 
 const app = express();
@@ -20,21 +20,22 @@ app.use(express.json());
 const staticPath = path.join(__dirname, "./public/");
 app.use(express.static(staticPath));
 app.use(cors());
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 
-const DB = "mongodb+srv://mahipalkeluth143:uK0niUwwZG9FOCHp@majordb.cb49png.mongodb.net/major_project_db?retryWrites=true&w=majority";
+const DB =
+  "mongodb+srv://mahipalkeluth143:uK0niUwwZG9FOCHp@majordb.cb49png.mongodb.net/major_project_db?retryWrites=true&w=majority";
 
 mongoose.connect(DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-mongoose.connection.on('connected', () => {
-  console.log('Connected to MongoDB Atlas');
+mongoose.connection.on("connected", () => {
+  console.log("Connected to MongoDB Atlas");
 });
 
-mongoose.connection.on('error', (err) => {
-  console.error('MongoDB connection error:', err);
+mongoose.connection.on("error", (err) => {
+  console.error("MongoDB connection error:", err);
 });
 
 app.post("/user-signin", (req, res) => {
@@ -42,7 +43,12 @@ app.post("/user-signin", (req, res) => {
   UserRegistrationModel.findOne({ email: email }).then((user) => {
     if (user) {
       if (user.password === password) {
-        res.json({ status: "Success", firstname: user.firstname, lastname: user.lastname, wallet: user.wallet });
+        res.json({
+          status: "Success",
+          firstname: user.firstname,
+          lastname: user.lastname,
+          wallet: user.wallet,
+        });
       } else {
         res.json("password incorrect");
       }
@@ -120,77 +126,79 @@ app.put("/payment/:email", async (req, res) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './public/uploads')
+    cb(null, "./public/uploads");
   },
   filename: (req, file, cb) => {
-    cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
-  }
-})
+    cb(
+      null,
+      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
 
 // const upload = multer({dest: 'images/'})
 const upload = multer({
-  storage: storage
-}).single('file');
+  storage: storage,
+}).single("file");
 
 app.post("/uploadPhoto", upload, async (req, res) => {
   PhotoModel.create({ email: req.body.email, image: req.file.filename })
     .then((result) => res.json(result))
-    .catch((err) => res.json(err))
-})
+    .catch((err) => res.json(err));
+});
 
-app.get('/getImage/:email', (req, res) => {
+app.get("/getImage/:email", (req, res) => {
   const email = req.params.email;
   PhotoModel.findOne({ email: email })
     .then((result) => res.json({ imageurl: result.image }))
-    .catch(err => res.json(res))
-})
+    .catch((err) => res.json(res));
+});
 
 // STUDENT APPLICATION //
 
 app.post("/student_personal_details", (req, res) => {
-  console.log(req.body);
   StudentPersonalDetailsModel.create(req.body)
     .then((result) => res.json(result))
-    .catch((err) => res.json(err))
-})
+    .catch((err) => res.json(err));
+});
 
 app.post("/student_study_details", (req, res) => {
   StudentStudyDetailsModel.create(req.body)
     .then((result) => res.json(result))
-    .catch((err) => res.json(err))
-})
+    .catch((err) => res.json(err));
+});
 
 app.post("/institution_detail", (req, res) => {
   InstitutionDetailsModel.create(req.body)
     .then((result) => res.json(result))
-    .catch((err) => res.json(err))
-})
+    .catch((err) => res.json(err));
+});
 
 app.post("/residential_address_details", (req, res) => {
   ResidentialAddressDetailsModel.create(req.body)
     .then((result) => res.json(result))
-    .catch((err) => res.json(err))
-})
+    .catch((err) => res.json(err));
+});
 
 // OTHER USER APPLICATION //
 
 app.post("/user_apply_personal_details", (req, res) => {
   UserPersonalDetailsModel.create(req.body)
     .then((res) => res.json(res))
-    .catch((err) => res.json(err))
-})
+    .catch((err) => res.json(err));
+});
 
 app.post("/user_apply_residential_details", (req, res) => {
   UserResidentialDetailsModel.create(req.body)
     .then((res) => res.json(res))
-    .catch((err) => res.json(err))
-})
+    .catch((err) => res.json(err));
+});
 
 app.post("/applicaiton_emails", (req, res) => {
   ApplicationMailsModel.create(req.body)
     .then((res) => res.json(res))
-    .catch((err) => res.json(err))
-})
+    .catch((err) => res.json(err));
+});
 
 /*  ------------ ADMIN API'S ------------- */
 
@@ -198,7 +206,7 @@ app.get("/application_mails", (req, res) => {
   ApplicationMailsModel.find()
     .then((result) => res.json(result))
     .catch((err) => res.json(err));
-})
+});
 
 app.get("/student-apply-personal-details/:applicationMail", (req, res) => {
   const applicationMail = req.params.applicationMail;
@@ -228,78 +236,66 @@ app.get("/student-apply-residential-details/:applicationMail", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-// app.delete("/deleteApplication/:email", (req, res) => {
-//   const email = req.params.email;
-//   ApplicationMailsModel.findByIdAndDelte(email)
-//   .then((res) => res.json({message: "Item deleted"}))
-//   .catch((err) => res.json(err))
-// })
-
 app.put("/statusUpdate/:email", async (req, res) => {
   try {
     const { newStatus } = req.body;
     const { email } = req.params;
     const updateDoc = await ApplicationMailsModel.findOneAndUpdate(
-      {email : email},
-      {$set: {status : newStatus}},
-      {new : true}
+      { email: email },
+      { $set: { status: newStatus } },
+      { new: true }
     );
 
-    if(!updateDoc) {
-      return res.status(404)
+    if (!updateDoc) {
+      return res.status(404);
     }
 
-    res.json(updateDoc)
-
+    res.json(updateDoc);
   } catch (err) {
-    res.json(err)
+    res.json(err);
   }
-})
+});
 
 app.put("/qrUrlUpdate/:email", async (req, res) => {
   try {
     const { qrUrl } = req.body;
     const { email } = req.params;
     const updateDoc = await ApplicationMailsModel.findOneAndUpdate(
-      {email : email},
-      {$set: {imgUrl : qrUrl}},
-      {new : true}
+      { email: email },
+      { $set: { imgUrl: qrUrl } },
+      { new: true }
     );
 
-    if(!updateDoc) {
-      return res.status(404)
+    if (!updateDoc) {
+      return res.status(404);
     }
 
-    res.json(updateDoc)
-
+    res.json(updateDoc);
   } catch (err) {
-    res.json(err)
+    res.json(err);
   }
-})
-
+});
 
 app.put("/dateUpdate/:email", async (req, res) => {
   try {
     const { startDate, endDate } = req.body;
     const { email } = req.params;
     const updateDoc = await ApplicationMailsModel.findOneAndUpdate(
-      {email : email},
-      {$set: {startDate : startDate, endDate : endDate}},
-      // {$set: {endDate : endDate}},
-      {new : true}
-      
+      { email: email },
+      { $set: { startDate: startDate, endDate: endDate } },
+
+      { new: true }
     );
 
-    if(!updateDoc) {
-      return res.status(404)
+    if (!updateDoc) {
+      return res.status(404);
     }
 
-    res.json(updateDoc)
-
+    res.json(updateDoc);
   } catch (err) {
-    res.json(err)
+    res.json(err);
   }
-})
+});
 
 app.get("/getName/:viewMail", (req, res) => {
   const viewMail = req.params.viewMail;

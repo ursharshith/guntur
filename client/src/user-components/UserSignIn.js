@@ -28,16 +28,18 @@ function UserSignIn() {
   const handleSignIn = (e) => {
     e.preventDefault();
     axios
-      .post("https://project-wmxw.onrender.com/user-signin", { email, password })
+      .post("http://localhost:8080/user-signin", {
+        email,
+        password,
+      })
       .then((result) => {
-        // console.log(result);
         if (result.data.status === "Success") {
           navigate("/");
           localStorage.setItem("userSignIn", true);
           localStorage.setItem("userEmail", email);
           localStorage.setItem("firstname", result.data.firstname);
           localStorage.setItem("lastname", result.data.lastname);
-          console.log(result.data);
+
           localStorage.setItem("wallet", result.data.wallet);
         } else {
           setLoginError(true);
@@ -46,7 +48,7 @@ function UserSignIn() {
           }, 5000);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   };
 
   return (
@@ -128,7 +130,11 @@ function UserSignIn() {
                 >
                   <Grid item>
                     New User?
-                    <Button variant="outlined" color="inherit" onClick={handleUserRegister}>
+                    <Button
+                      variant="outlined"
+                      color="inherit"
+                      onClick={handleUserRegister}
+                    >
                       Register
                     </Button>
                   </Grid>

@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 import Bus from "../images/bus-1.jpg";
 import Student from "../images/student1.jpg";
 import Employee from "../images/employee2.jpg";
@@ -71,7 +71,7 @@ function MultiActionAreaCard() {
   const isUserLoggedin = localStorage.getItem("userSignIn");
   const navigate = useNavigate();
   const handleStudent = () => {
-    if(isUserLoggedin === true) {
+    if (isUserLoggedin === true) {
       navigate("/student/high-school");
     }
   };
@@ -103,7 +103,7 @@ function MultiActionAreaCard1() {
   const isUserLoggedin = localStorage.getItem("userSignIn");
   const navigate = useNavigate();
   const handleOther = () => {
-    if(isUserLoggedin === true) {
+    if (isUserLoggedin === true) {
       navigate("/other/apply");
     }
   };

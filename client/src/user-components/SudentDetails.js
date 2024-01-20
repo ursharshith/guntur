@@ -2,8 +2,8 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import { Button, Input, MenuItem } from "@mui/material";
-import { useState, useEffect } from "react";
+import { Button, MenuItem } from "@mui/material";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
@@ -15,7 +15,7 @@ import {
   TableBody,
   Paper,
 } from "@mui/material";
-// import MandalAutoComplete from "../details/DistrictAutoComplete";
+
 import "../style.css";
 
 export default function StudentDetails({ filename }) {
@@ -87,16 +87,16 @@ export default function StudentDetails({ filename }) {
     formData.append("iam", name);
 
     axios
-      .post("https://project-wmxw.onrender.com/uploadPhoto", formData, {
+      .post("http://localhost:8080/uploadPhoto", formData, {
         body: {
-          email:email,
-        }
+          email: email,
+        },
       })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      .then((res) => {})
+      .catch((err) => {});
 
     axios
-      .post("https://project-wmxw.onrender.com/student_personal_details", {
+      .post("http://localhost:8080/student_personal_details", {
         name,
         dob,
         gender,
@@ -107,10 +107,10 @@ export default function StudentDetails({ filename }) {
         fatherName,
       })
       .then((res) => {})
-      .catch((err) => console.log(err));
+      .catch((err) => {});
 
     axios
-      .post("https://project-wmxw.onrender.com/student_study_details", {
+      .post("http://localhost:8080/student_study_details", {
         email,
         sscBoard,
         sscType,
@@ -119,10 +119,10 @@ export default function StudentDetails({ filename }) {
         dob,
       })
       .then((res) => {})
-      .catch((err) => console.log(err));
+      .catch((err) => {});
 
     axios
-      .post("https://project-wmxw.onrender.com/residential_address_details", {
+      .post("http://localhost:8080/residential_address_details", {
         email,
         district,
         mandal,
@@ -131,10 +131,10 @@ export default function StudentDetails({ filename }) {
         postalCode,
       })
       .then((res) => {})
-      .catch((err) => console.log(err));
+      .catch((err) => {});
 
     axios
-      .post("https://project-wmxw.onrender.com/institution_detail", {
+      .post("http://localhost:8080/institution_detail", {
         email,
         districtInstitution,
         mandalInstitution,
@@ -144,7 +144,7 @@ export default function StudentDetails({ filename }) {
         addressInstitution,
       })
       .then((res) => {})
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   };
 
   const handleEdit = () => {
@@ -152,40 +152,38 @@ export default function StudentDetails({ filename }) {
   };
 
   const handleNextPreview = () => {
-   
-    // if (sscBoard.length <= 0) {
-    //   alert("SSC Board Type is required");
-    // } else if (sscType.length <= 0) {
-    //   alert("SSC Type is required");
-    // } else if (sscPassYear.length <= 0) {
-    //   alert("SSC Pass Year is required");
-    // } else if (sscHallTicket.length <= 0) {
-    //   alert("SSC Hall Ticket is required");
-    // } else if (dob.length <= 0) {
-    //   alert("Date of Birth is required");
-    // } else if (name.length <= 0) {
-    //   alert("Name is required");
-    // } else if (fatherName.length <= 0) {
-    //   alert("Father name is required");
-    // } else if (gender.length <= 0) {
-    //   alert("Gender is required");
-    // } else if (mobileNo.length <= 0) {
-    //   alert("Mobile number is required");
-    // } else if (districtInstitution.length <= 0) {
-    //   alert("Institution District is required");
-    // } else if (mandalInstitution.length <= 0) {
-    //   alert("Institution Mandal is required");
-    // } else if (institutionname.length <= 0) {
-    //   alert("Institution Name is required");
-    // } else if (coursename.length <= 0) {
-    //   alert("Course name is required");
-    // } else if (admissionnumber.length <= 0) {
-    //   alert("Admission Number is required");
-    // } else {
+    if (sscBoard.length <= 0) {
+      alert("SSC Board Type is required");
+    } else if (sscType.length <= 0) {
+      alert("SSC Type is required");
+    } else if (sscPassYear.length <= 0) {
+      alert("SSC Pass Year is required");
+    } else if (sscHallTicket.length <= 0) {
+      alert("SSC Hall Ticket is required");
+    } else if (dob.length <= 0) {
+      alert("Date of Birth is required");
+    } else if (name.length <= 0) {
+      alert("Name is required");
+    } else if (fatherName.length <= 0) {
+      alert("Father name is required");
+    } else if (gender.length <= 0) {
+      alert("Gender is required");
+    } else if (mobileNo.length <= 0) {
+      alert("Mobile number is required");
+    } else if (districtInstitution.length <= 0) {
+      alert("Institution District is required");
+    } else if (mandalInstitution.length <= 0) {
+      alert("Institution Mandal is required");
+    } else if (institutionname.length <= 0) {
+      alert("Institution Name is required");
+    } else if (coursename.length <= 0) {
+      alert("Course name is required");
+    } else if (admissionnumber.length <= 0) {
+      alert("Admission Number is required");
+    } else {
       setReview(true);
-    // }
+    }
   };
-
 
   return (
     <div className="student-details-div">
@@ -295,7 +293,6 @@ export default function StudentDetails({ filename }) {
             <spam>Student Details</spam>
           </Typography>
           <div className="sub-divs">
-            {/* <img src="https://project-wmxw.onrender.com/uploads/file_1704565936291.jpg" alt="images"/> */}
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -348,7 +345,6 @@ export default function StudentDetails({ filename }) {
                   variant="outlined"
                   onChange={(e) => setGender(e.target.value)}
                 >
-                  {/* <MenuItem value="">SSC Board Type</MenuItem> */}
                   <MenuItem value="Male">Male</MenuItem>
                   <MenuItem value="Female">Female</MenuItem>
                   <MenuItem value="other">Other</MenuItem>
@@ -485,7 +481,6 @@ export default function StudentDetails({ filename }) {
                     Yadadri Bhuvanagiri
                   </MenuItem>
                 </TextField>
-                {/* <MandalAutoComplete /> */}
               </Grid>
 
               <Grid item xs={12} sm={6}>
@@ -723,7 +718,7 @@ export default function StudentDetails({ filename }) {
           >
             <spam>APPLICATION</spam>
           </Typography>
-          <img src={file}></img>
+          <img src={file} alt="" />
           <div style={{ display: "flex", flex: 1 }}>
             <div style={{ flex: 1, margin: "20px" }}>
               <TableContainer component={Paper}>
@@ -937,7 +932,7 @@ export default function StudentDetails({ filename }) {
             </div>
           </div>
           <div style={{ margin: "auto" }}>
-            <img src={`https://project-wmxw.onrender.com/${imageUrl}`} alt="" />
+            <img src={`http://localhost:8080/${imageUrl}`} alt="" />
             <Button
               type="text"
               onClick={handleEdit}

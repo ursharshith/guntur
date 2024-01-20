@@ -29,10 +29,9 @@ export default function StudentPayment() {
   const [months, setMonths] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [payButton, setPayButton] = useState(false);
-  const [imgUrl, setImgUrl] = useState(null)
-  const [startDate, setStartDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
-
+  const [imgUrl, setImgUrl] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   React.useEffect(() => {
     if (passType === "custom") {
@@ -56,7 +55,7 @@ export default function StudentPayment() {
     setShowAmount(true);
 
     axios
-      .get("https://project-wmxw.onrender.com/routeCost")
+      .get("http://localhost:8080/routeCost")
       .then((result) => setRouteDetails(result.data))
       .then(
         routeDetails.map((route) => {
@@ -65,7 +64,7 @@ export default function StudentPayment() {
           }
         })
       )
-      .catch((err) => console.log(err));
+      .catch((err) => {});
 
     if (passType === "year") {
       setMonths(12);
@@ -89,18 +88,26 @@ export default function StudentPayment() {
   const handlePay = () => {
     if (`${totalAmount}` === `${cost}`) {
       axios
-        .put(`https://project-wmxw.onrender.com/payment/${email}`, { cost })
+        .put(`http://localhost:8080/payment/${email}`, { cost })
         .then((result) => {
           setPaymentStatus(true);
           navigate("/student/high-school/payment/status");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {});
       axios
-        .post("https://project-wmxw.onrender.com/applicaiton_emails", {
-          email, fromplace, toplace, months, status, applicationType, imgUrl, startDate, endDate
+        .post("http://localhost:8080/applicaiton_emails", {
+          email,
+          fromplace,
+          toplace,
+          months,
+          status,
+          applicationType,
+          imgUrl,
+          startDate,
+          endDate,
         })
-        .then((res) => { })
-        .catch((err) => console.log(err));
+        .then((res) => {})
+        .catch((err) => {});
     } else {
       alert("Enter correct total amount");
     }

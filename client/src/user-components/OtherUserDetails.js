@@ -2,8 +2,8 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import { Button, Input, MenuItem } from "@mui/material";
-import { useState, useEffect } from "react";
+import { Button, MenuItem } from "@mui/material";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
@@ -51,12 +51,14 @@ export default function OtherUserDetails({ filename }) {
     formData.append("file", file);
 
     axios
-      .post("https://project-wmxw.onrender.com/uploadPhoto", formData, { email })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      .post("http://localhost:8080/uploadPhoto", formData, {
+        email,
+      })
+      .then((res) => {})
+      .catch((err) => {});
 
     axios
-      .post("https://project-wmxw.onrender.com/user_apply_personal_details", {
+      .post("http://localhost:8080/user_apply_personal_details", {
         name,
         dob,
         gender,
@@ -67,26 +69,29 @@ export default function OtherUserDetails({ filename }) {
         fatherName,
       })
       .then((res) => {})
-      .catch((err) => console.log(err));
+      .catch((err) => {});
 
     axios
-      .post("https://project-wmxw.onrender.com/user_apply_residential_details", {
-        email,
-        district,
-        mandal,
-        village,
-        address,
-        postalCode,
-      })
+      .post(
+        "http://localhost:8080/user_apply_residential_details",
+        {
+          email,
+          district,
+          mandal,
+          village,
+          address,
+          postalCode,
+        }
+      )
       .then((res) => {})
-      .catch((err) => console.log(err));
+      .catch((err) => {});
 
     axios
-      .post("https://project-wmxw.onrender.com/applicaiton_emails", {
+      .post("http://localhost:8080/applicaiton_emails", {
         email,
       })
       .then((res) => {})
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   };
 
   const handleEdit = () => {
