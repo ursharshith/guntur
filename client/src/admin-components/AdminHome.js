@@ -12,11 +12,12 @@ import {
   Button,
   Typography,
 } from "@mui/material";
-
 const AdminHome = () => {
   const [mailsData, setMailsData] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
   const [imageUrl, setImageUrl] = useState();
+
+  const [studentOrOther, setStudentOrOther] = useState(false);
 
   //Student Education details
   const [sscBoard, setSSCBoard] = useState("");
@@ -64,6 +65,7 @@ const AdminHome = () => {
     setShowDetails(true);
 
     if (user.applicationType === "student") {
+      setStudentOrOther(true);
       axios
         .get(
           `http://localhost:8080/student-apply-personal-details/${user.email}`
@@ -81,9 +83,7 @@ const AdminHome = () => {
         .catch((err) => {});
 
       axios
-        .get(
-          `http://localhost:8080/student-apply-study-details/${user.email}`
-        )
+        .get(`http://localhost:8080/student-apply-study-details/${user.email}`)
         .then((res) => {
           setSSCType(res.data.sscType);
           setSSCBoard(res.data.sscBoard);
@@ -122,8 +122,39 @@ const AdminHome = () => {
         .get(`http://localhost:8080/getImage/${user.email}`)
         .then((res) => setImageUrl(res.data.imageurl))
         .catch((err) => {});
-    }
-    if (user.applicationType === "other") {
+    } else if (user.applicationType === "other") {
+      setStudentOrOther(false);
+      axios
+        .get(`http://localhost:8080/user-apply-personal-details/${user.email}`)
+        .then((res) => {
+          console.log(res);
+          setName(res.data.name);
+          setDOB(res.data.dob);
+          setFatherName(res.data.fatherName);
+          setGender(res.data.gender);
+          setAge(res.data.age);
+          setMobileNo(res.data.mobileNo);
+          setEmail(res.data.email);
+          setAadhar(res.data.aadhar);
+        });
+
+      axios
+        .get(
+          `http://localhost:8080/user-apply-residential-details/${user.email}`
+        )
+        .then((res) => {
+          setDistrict(res.data.district);
+          setMandal(res.data.mandal);
+          setVillage(res.data.village);
+          setAddress(res.data.address);
+          setPostalCode(res.data.postalCode);
+        })
+        .catch((err) => {});
+
+      axios
+        .get(`http://localhost:8080/getImage/${user.email}`)
+        .then((res) => setImageUrl(res.data.imageurl))
+        .catch((err) => {});
     }
   };
 
@@ -243,7 +274,142 @@ const AdminHome = () => {
             <spam>APPLICATION</spam>
           </Typography>
           <img src={file} alt="" />
-          <div style={{ display: "flex", flex: 1 }}>
+          {!studentOrOther && (<div>
+            <div style={{ display: "flex", flex: 1 }}>
+              <div style={{ flex: 1, margin: "20px" }}>
+                <TableContainer component={Paper}>
+                  <Typography
+                    variant="h5"
+                    gutterBottom
+                    style={{
+                      marginLeft: "25%",
+                      fontSize: "20px",
+                    }}
+                  >
+                    Residential Address Details
+                  </Typography>
+                  <Table>
+                    <TableHead style={{ backgroundColor: "#f2f2f2" }}>
+                      <TableRow>
+                        <TableCell>
+                          <strong>Name</strong>
+                        </TableCell>
+                        <TableCell>
+                          <strong>Value</strong>
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>District</TableCell>
+                        <TableCell>{district}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Mandal</TableCell>
+                        <TableCell>{mandal}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Village</TableCell>
+                        <TableCell>{village}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Address</TableCell>
+                        <TableCell>{address}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Postal Code</TableCell>
+                        <TableCell>{postalCode}</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+            </div>
+            <div style={{ display: "flex", flex: 1 }}>
+              <div style={{ flex: 1, margin: "20px" }}>
+                <TableContainer component={Paper}>
+                  <Typography
+                    variant="h5"
+                    gutterBottom
+                    style={{
+                      marginLeft: "25%",
+                      fontSize: "20px",
+                    }}
+                  >
+                    Student Details
+                  </Typography>
+                  <Table>
+                    <TableHead style={{ backgroundColor: "#f2f2f2" }}>
+                      <TableRow>
+                        <TableCell>
+                          <strong>Name</strong>
+                        </TableCell>
+                        <TableCell>
+                          <strong>Value</strong>
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell>{name}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Father/ Guardian Name</TableCell>
+                        <TableCell>{fatherName}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Date of Birth</TableCell>
+                        <TableCell>{dob}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Gender</TableCell>
+                        <TableCell>{gender}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Age</TableCell>
+                        <TableCell>{age}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Aadhar</TableCell>
+                        <TableCell>{aadhar}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Mobile No</TableCell>
+                        <TableCell>{mobileNo}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Email</TableCell>
+                        <TableCell>{email}</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+              <div style={{ flex: 1, margin: "20px" }}>
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  style={{
+                    fontSize: "20px",
+                  }}
+                >
+                  Profile Photo
+                </Typography>
+                <img
+                  src={link}
+                  style={{
+                    height: "150px",
+                    width: "150px",
+                    textAlign: "center",
+                  }}
+                  alt="images"
+                />
+              </div>
+            </div>
+          </div>)}
+  
+          {studentOrOther && (<div><div style={{ display: "flex", flex: 1 }}>
             <div style={{ flex: 1, margin: "20px" }}>
               <TableContainer component={Paper}>
                 <Typography
@@ -419,6 +585,9 @@ const AdminHome = () => {
               />
             </div>
           </div>
+          </div>)}
+
+
           <div style={{ margin: "auto" }}>
             <Button
               type="text"

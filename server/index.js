@@ -236,6 +236,22 @@ app.get("/student-apply-residential-details/:applicationMail", (req, res) => {
     .catch((err) => res.json(err));
 });
 
+
+//user get apis
+app.get("/user-apply-personal-details/:applicationMail", (req, res) => {
+  const applicationMail = req.params.applicationMail;
+  UserPersonalDetailsModel.findOne({ email: applicationMail })
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
+app.get("/user-apply-residential-details/:applicationMail", (req, res) => {
+  const applicationMail = req.params.applicationMail;
+  UserResidentialDetailsModel.findOne({ email: applicationMail })
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
 app.put("/statusUpdate/:email", async (req, res) => {
   try {
     const { newStatus } = req.body;

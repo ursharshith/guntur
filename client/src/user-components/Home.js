@@ -37,6 +37,7 @@ import StudentDetails from "./SudentDetails";
 import StudentPayment from "./StudentPayment";
 import PaymentSuccessPage from "./PaymentSuccessPage";
 import HomeContent from "./HomeContent";
+import OtherPayment from "./OtherPayment"
 import ViewPass from "./ViewPass";
 import { useRef } from "react";
 import EmailSend from "./EmailSend";
@@ -409,6 +410,10 @@ export default function Home() {
           <Route
             path="/student/high-school/payment"
             element={<StudentPayment />}
+          ></Route>
+          <Route
+            path="/other/apply/payment"
+            element={<OtherPayment />}
           ></Route>
           <Route
             path="/student/high-school/payment/status"
